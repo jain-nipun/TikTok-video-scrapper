@@ -17,9 +17,9 @@ def gdrive_upload(string):
     g_login = GoogleAuth()
     g_login.LocalWebserverAuth()
     drive = GoogleDrive(g_login)
-    file2 = drive.CreateFile()
-    file2.SetContentFile(string)
-    file2.Upload()
+    output_file = drive.CreateFile()
+    output_file.SetContentFile(string)
+    output_file.Upload()
 
 
 api = TikTokApi().get_instance(custom_verifyFp=os.environ.get('verifyFp', None))
@@ -54,6 +54,7 @@ for tiktok in trending:
         vid = tiktok['itemInfos']["id"]
     url = 'https://www.tiktok.com/@' + username + '/video/' + vid + '?lang=en'
     print("Downloaded: " + str(count))
+    
     # Below is used if you want no watermarks
     video_data = api.get_Video_No_Watermark(url, return_bytes=1)
     with open(username + "/" + vid + "_" + username + video_name, 'wb') as output:
